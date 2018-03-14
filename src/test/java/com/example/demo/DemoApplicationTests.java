@@ -17,7 +17,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
-import com.example.demo.controller.HelloWorldController;
+import com.example.demo.controller.UserController;
 import com.example.demo.domain.User;
 import com.example.demo.mapper.UserMapper;
 
@@ -31,7 +31,7 @@ public class DemoApplicationTests {
 
 	@Before
 	public void setUp() throws Exception {
-		mvc = MockMvcBuilders.standaloneSetup(new HelloWorldController())
+		mvc = MockMvcBuilders.standaloneSetup(new UserController())
 				.build();
 	}
 
