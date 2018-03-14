@@ -15,7 +15,7 @@ public interface  UserMapper {
 	@Select("SELECT * FROM user")
 	@Results({
 		@Result(property = "username",  column = "user_name"),
-		@Result(property = "password", column = "user_name")
+		@Result(property = "password", column = "pass_word")
 	})
 	List<User> getAll();
 	
