@@ -1,5 +1,6 @@
 package com.example.demo;
 
+import ch.qos.logback.core.net.SyslogOutputStream;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -14,6 +15,7 @@ public class DemoApplication implements EmbeddedServletContainerCustomizer {
 
 	public static void main(String[] args) {
 		SpringApplication.run(DemoApplication.class, args);
+		SyslogOutputStream
 	}
 	@Override
 	public void customize(ConfigurableEmbeddedServletContainer arg0) {
