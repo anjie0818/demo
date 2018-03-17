@@ -11,13 +11,9 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @SpringBootApplication
 //定时任务注解
 @EnableScheduling
-public class DemoApplication implements EmbeddedServletContainerCustomizer {
+public class DemoApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(DemoApplication.class, args);
-	}
-	@Override
-	public void customize(ConfigurableEmbeddedServletContainer arg0) {
-		arg0.setPort(8088);
 	}
 }
