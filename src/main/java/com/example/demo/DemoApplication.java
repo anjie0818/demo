@@ -17,6 +17,8 @@ public class DemoApplication implements EmbeddedServletContainerCustomizer {
 		SpringApplication.run(DemoApplication.class, args);
         System.out.println("anjie");
         System.out.println("anjie");
+        System.out.println("anjie");
+        System.out.println("anjie");
 	}
 	@Override
 	public void customize(ConfigurableEmbeddedServletContainer arg0) {
