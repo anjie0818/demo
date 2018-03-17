@@ -10,13 +10,13 @@ import org.springframework.stereotype.Component;
 public class MyTimer {
 	SimpleDateFormat simpleDateFormat=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	//每3秒执行一次
-    @Scheduled(fixedRate = 3000)
+    @Scheduled(fixedRate = 3000000)
     public void timerRate() {
         System.out.println(simpleDateFormat.format(new Date()));
     }
 
     //第一次延迟1秒执行，当执行完后3秒再执行
-    @Scheduled(initialDelay = 1000, fixedDelay = 3000)
+    @Scheduled(initialDelay = 1000, fixedDelay = 3000000)
     public void timerInit() {
         System.out.println("init : "+simpleDateFormat.format(new Date()));
     }
