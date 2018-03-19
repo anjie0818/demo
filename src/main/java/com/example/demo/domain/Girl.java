@@ -25,6 +25,17 @@ public class Girl {
         this.email = email;
     }
 
+    @Override
+    public String toString() {
+        return "Girl{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", age=" + age +
+                ", email='" + email + '\'' +
+                '}';
+    }
+
     public Integer getId() {
         return id;
     }
