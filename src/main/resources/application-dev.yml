@@ -13,6 +13,11 @@ spring.datasource.driver-class-name: com.mysql.jdbc.Driver
 spring.jpa.hibernate.ddl-auto: update
 spring.jpa.show-sql: true
 spring.jackson.serialization.indent_output: true
+#配置前端页面
+spring.mvc.view.prefix: .html
+spring:
+  thymeleaf:
+    prefix: classpath:/templates/
 #设置spring-boot 编码格式
 banner.charset: UTF-8
 server.tomcat.uri-encoding: UTF-8
@@ -28,6 +33,7 @@ com.neo.content: "title+description=${com.neo.title}+${com.neo.description}"
 girl:
     age: 12
     username: dev
+
 #
 logging.path: D:/log
 logging.level.com.favorites: DEBUG
