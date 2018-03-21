@@ -23,30 +23,32 @@ public class TestController {
         return "/index";
     }
 
+    @RequestMapping("/uploadStatus")
+    public String uploadStatus(HashMap<String, Object> map) {
+        return "/uploadStatus";
+    }
+
     @RequestMapping("/goupload")
     public String goupLoad(HashMap<String, Object> map) {
         return "/upload";
     }
     @PostMapping("/uploadfile")
-    public String singleFileUpload(@RequestParam("file") MultipartFile file,
-                                   Model model) {
+    public String singleFileUpload(@RequestParam("file") MultipartFile file, RedirectAttributes redirectAttributes) {
         if (file.isEmpty()) {
-            model.addAttribute("message", "Please select a file to upload");
-            return "/uploadStatus";
+            redirectAttributes.addFlashAttribute("message", "Please select a file to upload");
+            return "redirect:uploadStatus";//redircet找的是controller中的内容，区别没有重定向（资源+controller）
         }
         try {
             // Get the file and save it somewhere
             byte[] bytes = file.getBytes();
             Path path = Paths.get("pic\\"+file.getOriginalFilename());
             Files.write(path, bytes);
-
-            model.addAttribute("message",
+            redirectAttributes.addFlashAttribute("message",
                     "You successfully uploaded '" + file.getOriginalFilename() + "'");
-
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        return "uploadStatus";
+        return "redirect:/uploadStatus";
     }
 }
