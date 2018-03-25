@@ -15,9 +15,9 @@ public class ArticleCategory implements Serializable {
     @ManyToOne
     @JoinColumn(name = "category_id")
     private Category category;
-
     public static long getSerialVersionUID() {
         return serialVersionUID;
     }
+
 
 }

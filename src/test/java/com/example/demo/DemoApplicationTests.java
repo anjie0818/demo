@@ -2,7 +2,9 @@ package com.example.demo;
 
 
 
+import com.example.demo.dao.CategoryDao;
 import com.example.demo.dao.GirlDao;
+import com.example.demo.domain.Category;
 import com.example.demo.domain.Girl;
 import org.junit.Before;
 import org.junit.Test;
@@ -28,15 +30,22 @@ public class DemoApplicationTests {
 
 	private MockMvc mvc;
 	@Autowired
-	private UserMapper UserMapper;
-	@Autowired
 	private GirlDao girlDao;
+	@Autowired
+	private CategoryDao categoryDao;
 
 	@Before
 	public void setUp() throws Exception {
 		mvc = MockMvcBuilders.standaloneSetup(new UserController()).build();
 	}
-
+	@Test
+	public void getCategory(){
+		List<Category> categoryList = categoryDao.findAll();
+		for (Category c:categoryList
+			 ) {
+			System.out.println(c);
+		}
+	}
 	@Test
 	public void getHello() throws Exception {
 		/**
