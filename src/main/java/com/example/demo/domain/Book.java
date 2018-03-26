@@ -4,12 +4,20 @@ import javax.persistence.*;
 
 @Entity
 public class Book {
+    @Override
+    public String toString() {
+        return "Book{" +
+                "Id=" + Id +
+                ", name='" + bookname + '\'' +
+                ", price=" + price +
+                ", author=" + author +
+                '}';
+    }
 
-
-        @Id
+    @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         private int Id;
-        private String name;
+    private String bookname;
         private float price;
         @JoinColumn
         @ManyToOne(cascade = CascadeType.ALL,optional = false,fetch = FetchType.EAGER)
@@ -18,6 +26,7 @@ public class Book {
         //CascadType.ALL 则包含了所有级联操作
         private Author author;
         //自动映射到数据库字段为author_id
+
 
     public int getId() {
         return Id;
@@ -28,11 +37,11 @@ public class Book {
     }
 
     public String getName() {
-        return name;
+        return bookname;
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.bookname = name;
     }
 
     public float getPrice() {

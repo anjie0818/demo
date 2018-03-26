@@ -12,6 +12,11 @@ public interface ArticleVO {
         Date getUpdate_time();
 
         String getName();
+
+        String getBookname();
+
+        String getPrice();
+
 }
 
 

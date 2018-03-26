@@ -10,11 +10,11 @@ public class ArticleCategory implements Serializable {
     //查看mysql表主外键关系的表
     //INFORMATION_SCHEMA.KEY_COLUMN_USAGE
     @Id
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "article_id")
     private Article article;
     @Id
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "category_id")
     private Category category;
     public static long getSerialVersionUID() {

@@ -22,7 +22,9 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import com.example.demo.controller.UserController;
 import com.example.demo.mapper.UserMapper;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -43,17 +45,16 @@ public class DemoApplicationTests {
     @Autowired
     private CategoryDao categoryDao;
 
-    public void test_book_author() {
-		Book book = bookDao.findOne(1);
-		System.out.println(book);
-    }
-	public void getCategory(){
-		List<Category> categoryList = categoryDao.findAll();
-		for (Category c:categoryList
-			 ) {
-			System.out.println(c);
+	@Test
+	public void test_book() {
+		List<Book> book = bookDao.findAll();
+		for (Book b : book
+				) {
+			System.out.println(b);
 		}
-	}
+    }
+
+
 	@Test
 	public void getHello() throws Exception {
 		/**

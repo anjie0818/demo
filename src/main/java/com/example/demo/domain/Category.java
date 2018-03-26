@@ -25,7 +25,7 @@ public class Category {
     private String name;
     private String ky;
     private Integer status;
-    @OneToMany(mappedBy = "category")
+    @OneToMany(mappedBy = "category", fetch = FetchType.EAGER)
     private Set<ArticleCategory> articleCategoryList;
 
     public static long getSerialVersionUID() {

@@ -24,7 +24,8 @@ public class Article implements Serializable {
     private Date updateTime;
     private Integer status;
     //关联表
-    @OneToMany(mappedBy = "article", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "article", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+
     //mappedBy属性值是mapped=“由One的一方指向Many的一方，并且，这个属性应该等于Many的一方中含有One类的属性的属性名，否则会出错啦 ”
     //级联删除：orphanRemoval = true
     private Set<ArticleCategory> articleCategroyList;
@@ -116,6 +117,7 @@ public class Article implements Serializable {
                 ", createTime=" + createTime +
                 ", updateTime=" + updateTime +
                 ", status=" + status +
+                ", articleCategroyList=" + articleCategroyList +
                 '}';
     }
 }
