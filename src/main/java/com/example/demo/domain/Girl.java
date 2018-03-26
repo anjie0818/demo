@@ -17,14 +17,6 @@ public class Girl {
     public Girl() {
     }
 
-    public Girl(Integer id, String username, String password, Integer age, String email) {
-        this.id = id;
-        this.username = username;
-        this.password = password;
-        this.age = age;
-        this.email = email;
-    }
-
     @Override
     public String toString() {
         return "Girl{" +

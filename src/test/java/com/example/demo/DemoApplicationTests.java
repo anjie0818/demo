@@ -2,10 +2,11 @@ package com.example.demo;
 
 
 
-import com.example.demo.dao.CategoryDao;
-import com.example.demo.dao.GirlDao;
-import com.example.demo.domain.Category;
-import com.example.demo.domain.Girl;
+
+import com.example.demo.controller.ArticleController;
+import com.example.demo.dao.*;
+import com.example.demo.domain.*;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -21,8 +22,11 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import com.example.demo.controller.UserController;
 import com.example.demo.mapper.UserMapper;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -32,20 +36,25 @@ public class DemoApplicationTests {
 	@Autowired
 	private GirlDao girlDao;
 	@Autowired
-	private CategoryDao categoryDao;
 
-	@Before
-	public void setUp() throws Exception {
-		mvc = MockMvcBuilders.standaloneSetup(new UserController()).build();
-	}
+	private ArticleDao articleDao;
+	@Autowired
+	private AuthorDao authorDao;
+	@Autowired
+	private BookDao bookDao;
+    @Autowired
+    private CategoryDao categoryDao;
+
 	@Test
-	public void getCategory(){
-		List<Category> categoryList = categoryDao.findAll();
-		for (Category c:categoryList
-			 ) {
-			System.out.println(c);
+	public void test_book() {
+		List<Book> book = bookDao.findAll();
+		for (Book b : book
+				) {
+			System.out.println(b);
 		}
-	}
+    }
+
+
 	@Test
 	public void getHello() throws Exception {
 		/**
@@ -104,4 +113,5 @@ public class DemoApplicationTests {
         //girlDao.findByEmail("2323@qq.com17");
         girlDao.findByEmail("2323@qq.com16");
 	}
+
 }
