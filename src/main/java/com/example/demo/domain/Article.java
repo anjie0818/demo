@@ -104,4 +104,18 @@ public class Article implements Serializable {
     public void setArticleCategroyList(Set<ArticleCategory> articleCategroyList) {
         this.articleCategroyList = articleCategroyList;
     }
+
+    @Override
+    public String toString() {
+        return "Article{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", content='" + content + '\'' +
+                ", userId=" + userId +
+                ", likeCount=" + likeCount +
+                ", createTime=" + createTime +
+                ", updateTime=" + updateTime +
+                ", status=" + status +
+                '}';
+    }
 }

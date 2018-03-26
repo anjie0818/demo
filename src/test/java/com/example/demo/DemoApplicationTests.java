@@ -2,8 +2,12 @@ package com.example.demo;
 
 
 
+import com.example.demo.controller.ArticleController;
+import com.example.demo.dao.ArticleDao;
+import com.example.demo.dao.AuthorDao;
+import com.example.demo.dao.BookDao;
 import com.example.demo.dao.GirlDao;
-import com.example.demo.domain.Girl;
+import com.example.demo.domain.*;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -21,6 +25,7 @@ import com.example.demo.controller.UserController;
 import com.example.demo.mapper.UserMapper;
 
 import java.util.List;
+import java.util.Set;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -31,12 +36,22 @@ public class DemoApplicationTests {
 	private UserMapper UserMapper;
 	@Autowired
 	private GirlDao girlDao;
+	@Autowired
+	private ArticleDao articleDao;
+	@Autowired
+	private AuthorDao authorDao;
+	@Autowired
+	private BookDao bookDao;
 
 	@Before
 	public void setUp() throws Exception {
 		mvc = MockMvcBuilders.standaloneSetup(new UserController()).build();
 	}
-
+	@Test
+	public void test_book_author(){
+		Book book = bookDao.findOne(1);
+		System.out.println(book);
+	}
 	@Test
 	public void getHello() throws Exception {
 		/**
@@ -95,4 +110,5 @@ public class DemoApplicationTests {
         //girlDao.findByEmail("2323@qq.com17");
         girlDao.findByEmail("2323@qq.com16");
 	}
+
 }

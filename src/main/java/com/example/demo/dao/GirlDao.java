@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 @Repository
-public interface GirlDao extends JpaRepository<Girl, Long> {
+public interface GirlDao extends JpaRepository<Girl, Integer> {
     List<Girl> findByUsernameAndAge (String username,Integer age);
     // 分页查询
     Page<Girl> findByUsername(String username,Pageable pageable);
