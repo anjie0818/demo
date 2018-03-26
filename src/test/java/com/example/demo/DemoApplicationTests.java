@@ -2,19 +2,11 @@ package com.example.demo;
 
 
 
-<<<<<<< HEAD
+
 import com.example.demo.controller.ArticleController;
-import com.example.demo.dao.ArticleDao;
-import com.example.demo.dao.AuthorDao;
-import com.example.demo.dao.BookDao;
-import com.example.demo.dao.GirlDao;
+import com.example.demo.dao.*;
 import com.example.demo.domain.*;
-=======
-import com.example.demo.dao.CategoryDao;
-import com.example.demo.dao.GirlDao;
-import com.example.demo.domain.Category;
-import com.example.demo.domain.Girl;
->>>>>>> d1c0c9cff1dde6ff6467966be650363c5a7ba2ab
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -48,6 +40,8 @@ public class DemoApplicationTests {
 	private AuthorDao authorDao;
 	@Autowired
 	private BookDao bookDao;
+    @Autowired
+    private CategoryDao categoryDao;
 
     public void test_book_author() {
 		Book book = bookDao.findOne(1);
