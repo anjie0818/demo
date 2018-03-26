@@ -9,6 +9,20 @@ import java.util.Set;
 @Entity
 @Table(name = "T_article")
 public class Article implements Serializable {
+    @Override
+    public String toString() {
+        return "Article{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", content='" + content + '\'' +
+                ", userId=" + userId +
+                ", likeCount=" + likeCount +
+                ", createTime=" + createTime +
+                ", updateTime=" + updateTime +
+                ", status=" + status +
+                '}';
+    }
+
     private static final long serialVersionUID = 7419229779731522702L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

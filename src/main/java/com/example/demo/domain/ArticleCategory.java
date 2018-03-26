@@ -19,5 +19,10 @@ public class ArticleCategory implements Serializable {
         return serialVersionUID;
     }
 
-
+    @Override
+    public String toString() {
+        return "ArticleCategory{" +
+                "article=" + article +
+                '}';
+    }
 }

@@ -6,7 +6,6 @@ import java.util.Set;
 @Entity
 @Table(name = "T_category")
 public class Category {
-
     @Override
     public String toString() {
         return "Category{" +
@@ -14,7 +13,7 @@ public class Category {
                 ", name='" + name + '\'' +
                 ", ky='" + ky + '\'' +
                 ", status=" + status +
-
+                ", articleCategoryList=" + articleCategoryList +
                 '}';
     }
 
@@ -25,7 +24,7 @@ public class Category {
     private String name;
     private String ky;
     private Integer status;
-    @OneToMany(mappedBy = "category")
+    @OneToMany(mappedBy = "category",fetch = FetchType.EAGER)
     private Set<ArticleCategory> articleCategoryList;
 
     public static long getSerialVersionUID() {
