@@ -42,33 +42,23 @@ public class DemoApplicationTests {
 	@Autowired
 	private GirlDao girlDao;
 	@Autowired
-<<<<<<< HEAD
+
 	private ArticleDao articleDao;
 	@Autowired
 	private AuthorDao authorDao;
 	@Autowired
 	private BookDao bookDao;
-=======
-	private CategoryDao categoryDao;
->>>>>>> d1c0c9cff1dde6ff6467966be650363c5a7ba2ab
 
-	@Before
-	public void setUp() throws Exception {
-		mvc = MockMvcBuilders.standaloneSetup(new UserController()).build();
-	}
-	@Test
-<<<<<<< HEAD
-	public void test_book_author(){
+    public void test_book_author() {
 		Book book = bookDao.findOne(1);
 		System.out.println(book);
-=======
+    }
 	public void getCategory(){
 		List<Category> categoryList = categoryDao.findAll();
 		for (Category c:categoryList
 			 ) {
 			System.out.println(c);
 		}
->>>>>>> d1c0c9cff1dde6ff6467966be650363c5a7ba2ab
 	}
 	@Test
 	public void getHello() throws Exception {
