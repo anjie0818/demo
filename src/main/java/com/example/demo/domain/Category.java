@@ -6,6 +6,18 @@ import java.util.Set;
 @Entity
 @Table(name = "T_category")
 public class Category {
+
+    @Override
+    public String toString() {
+        return "Category{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", ky='" + ky + '\'' +
+                ", status=" + status +
+
+                '}';
+    }
+
     private static final long serialVersionUID = 7419229779731522702L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

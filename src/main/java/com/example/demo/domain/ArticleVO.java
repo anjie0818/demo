@@ -1,5 +1,6 @@
 package com.example.demo.domain;
 
+
 import java.util.Date;
 
 public interface ArticleVO {
@@ -11,8 +12,8 @@ public interface ArticleVO {
         Date getUpdate_time();
 
         String getName();
-
-
-
-
 }
+
+
+
+
