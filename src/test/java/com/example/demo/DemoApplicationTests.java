@@ -47,12 +47,12 @@ public class DemoApplicationTests {
 
 	@Test
 	public void test_book() {
-		List<Book> book = bookDao.findAll();
-		for (Book b : book
-				) {
-			System.out.println(b);
+		Page<BookVo> list = bookDao.findByBook(new PageRequest(0, 10));
+		for (BookVo bv:list
+			 ) {
+			System.out.println(bv.getBookname()+"=="+bv.getName());
 		}
-    }
+	}
 
 
 	@Test

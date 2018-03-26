@@ -2,12 +2,8 @@ package com.example.demo.domain;
 
 import java.util.Date;
 
-public interface AuthorVo {
+public interface BookVo {
     Integer getId();
-
-    String getTitle();
-
-    Date getUpdate_time();
 
     String getName();
 
