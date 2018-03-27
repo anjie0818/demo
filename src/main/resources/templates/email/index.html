@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<h1>发送邮件</h1>
+<form method="POST" action="/cemail/post" >
+    主题:<input type="text" name="subject" /><br/><br/>
+    to:<input type="text" name="to" /><br/><br/>
+    内容:<input type="text"  name="content"/><br/><br/>
+    <input type="submit" value="Submit" />
+</form>
+</body>
+</html>

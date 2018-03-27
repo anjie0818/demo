@@ -25,6 +25,7 @@ import com.example.demo.mapper.UserMapper;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -47,14 +48,16 @@ public class DemoApplicationTests {
 
 	@Test
 	public void test_book() {
-		Page<BookVo> list = bookDao.findByBook(new PageRequest(0, 10));
-		for (BookVo bv:list
-			 ) {
-			System.out.println(bv.getBookname()+"=="+bv.getName());
+		int page=0,size=1;
+		Pageable pageable = new PageRequest(page, size);
+		Page<Book> s = bookDao.findAll(pageable);
+		Iterator<Book> ss = s.iterator();
+		while (ss.hasNext()) {
+			Book ele = ss.next();
+			System.out.println(ele);//Bob  Alice  Lisy
 		}
+
 	}
-
-
 	@Test
 	public void getHello() throws Exception {
 		/**

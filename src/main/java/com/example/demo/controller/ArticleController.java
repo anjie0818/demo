@@ -1,6 +1,4 @@
 package com.example.demo.controller;
-
-
 import com.example.demo.domain.ArticleVO;
 import com.example.demo.service.ArticleService;
 import org.springframework.beans.factory.annotation.Autowired;

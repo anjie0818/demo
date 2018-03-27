@@ -16,7 +16,7 @@ import java.nio.file.Paths;
 import java.util.HashMap;
 
 @Controller
-public class TestController {
+public class UploadfileController {
     @RequestMapping("/index")
     public String helloHtml(HashMap<String, Object> map) {
         map.put("hello", "欢迎进入HTML页面");
