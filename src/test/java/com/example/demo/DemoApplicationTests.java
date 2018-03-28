@@ -7,6 +7,8 @@ import com.example.demo.controller.ArticleController;
 import com.example.demo.dao.*;
 import com.example.demo.domain.*;
 
+import com.example.demo.service.EmailService;
+import com.example.demo.service.PersonService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -45,7 +47,27 @@ public class DemoApplicationTests {
 	private BookDao bookDao;
     @Autowired
     private CategoryDao categoryDao;
+    @Autowired
+	private EmailService emailService;
+    @Autowired
+	private PersonService personService;
+    @Test
+	public void testPerson(){
+		List<Person> s = personService.getPersonList();
+		for (Person p:s
+			 ) {
+			System.out.println(s);
+		}
+	}
 
+	@Test
+	public void sendInlineResourceMail() {
+		String rscId = "Chrysanthemum.jpg";
+		String content="<html><body>这是有图片的邮件：<img src=\'cid:" + rscId + "\' ></body></html>";
+		String imgPath = "F:\\IdeaProjects\\demo\\pic\\Chrysanthemum.jpg";
+
+		emailService.sendInlineResourceMail("1257772358@qq.com", "主题：这是有图片的邮件", content, imgPath, rscId);
+	}
 	@Test
 	public void test_book() {
 		int page=0,size=1;

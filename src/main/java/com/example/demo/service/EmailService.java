@@ -14,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 import java.io.File;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -34,6 +35,7 @@ public class EmailService  {
         mailSender.send(message);
         logger.error("发送简单邮件成功");
     }
+
     public void sendHtmlMail(String to, String subject, String content) throws Exception {
         MimeMessage message = mailSender.createMimeMessage();
         String content1="<html>\n" +
@@ -57,8 +59,24 @@ public class EmailService  {
             throw e;
         }
     }
+    public void sendHtmlMail2(String to, String subject, String content) throws Exception {
+        MimeMessage message = mailSender.createMimeMessage();
 
+        try {
+            //true表示需要创建一个multipart message
+            MimeMessageHelper helper = new MimeMessageHelper(message, true);
+            helper.setFrom(from);
+            helper.setTo(to);
+            helper.setSubject(subject);
+            helper.setText(content, true);
 
+            mailSender.send(message);
+            logger.info("html邮件发送成功");
+        } catch (Exception e) {
+            logger.error("发送html邮件时发生异常！", e);
+            throw e;
+        }
+    }
     public void sendFileMail(String to, String subject, String content, MultipartFile file) throws Exception{
 
         MimeMessage message = mailSender.createMimeMessage();
@@ -82,6 +100,25 @@ public class EmailService  {
         } catch (Exception e) {
             logger.error("发送带附件的邮件时发生异常！", e);
             throw e;
+        }
+    }
+    public void sendInlineResourceMail(String to, String subject, String content, String rscPath, String rscId){
+        MimeMessage message = mailSender.createMimeMessage();
+
+        try {
+            MimeMessageHelper helper = new MimeMessageHelper(message, true);
+            helper.setFrom(from);
+            helper.setTo(to);
+            helper.setSubject(subject);
+            helper.setText(content, true);
+
+            FileSystemResource res = new FileSystemResource(new File(rscPath));
+            helper.addInline(rscId, res);
+
+            mailSender.send(message);
+            logger.info("嵌入静态资源的邮件已经发送。");
+        } catch (MessagingException e) {
+            logger.error("发送嵌入静态资源的邮件时发生异常！", e);
         }
     }
 }

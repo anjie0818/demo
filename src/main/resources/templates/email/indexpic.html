@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<h1>Spring Boot file upload example</h1>
+<form method="POST" action="http://localhost:8088/cemail/postpic" enctype="multipart/form-data">
+
+    主题:<input type="text" name="subject" /><br/><br/>
+    to:<input type="text" name="to" /><br/><br/>
+    内容:<input type="text"  name="content"/><br/><br/>
+    图片:<input type="file" name="file" /><br/><br/>
+    <input type="submit" value="Submit" />
+
+</form>
+</body>
+</html>
