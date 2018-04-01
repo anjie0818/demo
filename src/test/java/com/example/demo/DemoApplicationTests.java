@@ -3,7 +3,6 @@ package com.example.demo;
 
 
 
-import com.example.demo.controller.ArticleController;
 import com.example.demo.dao.*;
 import com.example.demo.domain.*;
 
@@ -11,7 +10,6 @@ import com.example.demo.service.AuthorService;
 import com.example.demo.service.BookService;
 import com.example.demo.service.EmailService;
 import com.example.demo.service.PersonService;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,16 +20,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-
-import com.example.demo.controller.UserController;
-import com.example.demo.mapper.UserMapper;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
