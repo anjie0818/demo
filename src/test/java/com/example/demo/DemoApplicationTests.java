@@ -7,6 +7,8 @@ import com.example.demo.controller.ArticleController;
 import com.example.demo.dao.*;
 import com.example.demo.domain.*;
 
+import com.example.demo.service.AuthorService;
+import com.example.demo.service.BookService;
 import com.example.demo.service.EmailService;
 import com.example.demo.service.PersonService;
 import org.junit.Before;
@@ -51,6 +53,53 @@ public class DemoApplicationTests {
 	private EmailService emailService;
     @Autowired
 	private PersonService personService;
+    @Autowired
+	private BookService bookService;
+    @Autowired
+	private AuthorService authorService;
+    @Test
+	public  void saveAuthor(){
+		Author author=new Author();
+		author.setId(1);
+		author.setAge(11);
+		author.setName("aaaaaaa");
+		authorDao.save(author);
+	}
+    @Test
+	public void saveAuthorsTest(){
+    	Author author=null;
+    	List<Author> list=new ArrayList<Author>();
+    	for (int i=0;i<10;i++){
+    		author=new Author();
+    		author.setName("test"+i);
+    		author.setAge(i+20);
+    		list.add(author);
+		}
+		authorService.saveAuthor(list);
+
+
+	}
+    @Test
+	public void saveBooksTest(){
+
+	List<Book> list =new ArrayList<Book>();
+		Author author = new Author();
+		author.setName("jina");
+		author.setAge(111);
+		Book book=null;
+		int i=6;
+		book=new Book();
+		book.setBookname("a55fsf55njie"+i);
+		book.setPrice(i+1010);
+		book.setAuthor(author);
+		bookService.save(book);
+	}
+    @Test
+	public void testBookMaxId(){
+		Integer count= bookDao.findCount();
+		System.out.println(count);
+	}
+
     @Test
 	public void testPerson(){
 		List<Person> s = personService.getPersonList();
@@ -70,13 +119,19 @@ public class DemoApplicationTests {
 	}
 	@Test
 	public void test_book() {
+		List<String> lists=new ArrayList<String>();
+		lists.add("hexin1");
+		lists.add("hexin2");
+		List<Book> list = bookDao.findByBooknameIn(lists);
+		System.out.println(list.size());
+		System.out.println("-------");
 		int page=0,size=1;
 		Pageable pageable = new PageRequest(page, size);
 		Page<Book> s = bookDao.findAll(pageable);
 		Iterator<Book> ss = s.iterator();
 		while (ss.hasNext()) {
 			Book ele = ss.next();
-			System.out.println(ele);//Bob  Alice  Lisy
+			//System.out.println(ele);//Bob  Alice  Lisy
 		}
 
 	}

@@ -1,7 +1,5 @@
 package com.example.demo.service;
 
-import com.example.demo.dao.ArticleDao;
-import com.example.demo.domain.ArticleVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

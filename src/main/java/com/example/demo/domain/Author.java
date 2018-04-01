@@ -1,6 +1,8 @@
 package com.example.demo.domain;
 
 
+import org.springframework.context.annotation.Scope;
+
 import javax.persistence.*;
 import java.util.List;
 
