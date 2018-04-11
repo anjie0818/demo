@@ -21,7 +21,10 @@ import org.springframework.data.domain.Sort;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
+import java.time.DayOfWeek;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.GregorianCalendar;
 import java.util.Iterator;
 import java.util.List;
 
@@ -49,6 +52,55 @@ public class DemoApplicationTests {
 	private BookService bookService;
     @Autowired
 	private AuthorService authorService;
+    @Test
+	public void test(){
+		GregorianCalendar gc=new GregorianCalendar();
+		System.out.println(gc.getTime());
+
+	}
+    @Test
+	public void testLocalDate(){
+    	//获取当前时间对象
+		LocalDate date = LocalDate.now();
+		//获取当前时间对象的月份和日子
+		int month=date.getMonthValue();
+		int today=date.getDayOfMonth();
+		//将date设置位当前日前最小的date
+		date=date.minusDays(today-1);
+		//得到当月最小日子是周几
+		DayOfWeek weekday = date.getDayOfWeek();
+		//得到当月第一天对应星期数的值
+		int value = weekday.getValue();
+		//进行日历的首行缩进
+		System.out.println("Mon Tue Wed Thu Fri Sat Sun");
+		for (int i=1;i<value;i++){
+			System.out.print("    ");
+		}
+		while(date.getMonthValue()==month){
+			System.out.printf("%3d",date.getDayOfMonth());
+			if (date.getDayOfMonth()==today){
+				System.out.print("*");
+			}else {
+				System.out.print(" ");
+			}
+			date=date.plusDays(1);
+			if (date.getDayOfWeek().getValue()==1){
+				System.out.println();
+			}
+		}
+	}
+    @Test
+	public void testBooksPage(){
+    	Sort.Order order= new Sort.Order(Sort.Direction.DESC,"price");
+    	Sort sort=new Sort(order);
+    	Pageable pageable=new PageRequest(1,5,sort);
+		Page<Book> page = bookDao.findAll(pageable);
+		System.out.println(page.getTotalPages());
+		System.out.println(page.getTotalElements());
+		System.out.println(page.getNumber());
+		System.out.println(page.getContent());
+		System.out.println(page.getNumberOfElements());
+	}
     @Test
 	public  void saveAuthor(){
 		Author author=new Author();
