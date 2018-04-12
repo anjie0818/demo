@@ -14,6 +14,14 @@ public class Test4 {
              ) {
             System.out.println(e.getSalary()+"----"+e.getName());
         }
+        if (emoloyee4s[0] instanceof Manager4){
+            Manager4 manager1 = (Manager4) emoloyee4s[0];
+            System.out.println(manager1.toString());
+        }
+        else {
+            System.out.println("不能转化");
+        }
+
     }
 }
 class Emoloyee4{
