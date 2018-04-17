@@ -8,18 +8,19 @@ public class Test5 {
         Person[] perple=new Person[2];
         perple[0]=new Employee5("anjie",5000.11,2018,9,12);
         perple[1]=new Student("student","major");
+        Object o=new Object();
+        System.out.println();
         for (Person p:perple
              ){
             System.out.println(p.getDescription()+"-----"+p.getName());
         }
-        Object o=new Object();
+        Object ob=new Object();
+        ob.hashCode();
+        String s ="a";
+        s.hashCode();
         Date date=new Date();
         date.clone();
-        String s="ss";
-        String ss=new String("ss");
-        System.out.println(s);
-        System.out.println(ss);
-        System.out.println(s==ss);
+
     }
 }
 abstract class Person{

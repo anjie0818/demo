@@ -31,7 +31,11 @@ import java.util.List;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class DemoApplicationTests {
-
+	@Test
+	public void test(){
+		System.out.println("ss");
+	}
+/*
 	private MockMvc mvc;
 	@Autowired
 	private GirlDao girlDao;
@@ -187,7 +191,9 @@ public class DemoApplicationTests {
 		 * MediaType.APPLICATION_JSON)).andExpect(status().isOk())
 		 * .andExpect(content().string(equalTo("Hello World")));
 		 */
-	}
+
+
+/*
 	@Test
 	public  void  testGrilDao() {
 
@@ -237,5 +243,5 @@ public class DemoApplicationTests {
         //girlDao.findByEmail("2323@qq.com17");
         girlDao.findByEmail("2323@qq.com16");
 	}
-
+*/
 }
