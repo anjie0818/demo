@@ -13,6 +13,13 @@ public class Test1 {
     }
 }
 class  Employee{
+    public Employee() {
+    }
+
+    public Employee(String name) {
+        this.name = name;
+    }
+
     private  String name;
     private double salary;
     private Date salaryDate;
@@ -39,12 +46,19 @@ class  Employee{
     }
 
     public Date getSalaryDate() {
-        System.out.println(salaryDate);
-        System.out.println((Date) salaryDate.clone());
-        return salaryDate;
+        return (Date) salaryDate.clone();
     }
 
     public void setSalaryDate(Date salaryDate) {
         this.salaryDate = salaryDate;
+    }
+
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "name='" + name + '\'' +
+                ", salary=" + salary +
+                ", salaryDate=" + salaryDate +
+                '}';
     }
 }

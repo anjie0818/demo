@@ -2,13 +2,14 @@ package com.example.demo.javaImport;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 
 public class Test13_interface {
     public static void main(String[] args) {
-        NewPerson newPerson1=new NewPerson(1,"anjie");
-        NewPerson newPerson2=new NewPerson(2,"anjie");
-        NewPerson newPerson3=new NewPerson(3,"anjie");
-        NewPerson newPerson4=new NewPerson(4,"anjie");
+        NewPerson newPerson1=new NewPerson(1,"anj2ie");
+        NewPerson newPerson2=new NewPerson(2,"anj222222ie");
+        NewPerson newPerson3=new NewPerson(3,"ajie");
+        NewPerson newPerson4=new NewPerson(4,"an2222jie");
         NewPerson[] newPeoples={newPerson1,newPerson3,newPerson4,newPerson2};
         for (NewPerson n:newPeoples
              ) {
@@ -57,6 +58,16 @@ class NewPerson implements Comparable<NewPerson>{
 
     @Override
     public int compareTo(NewPerson o) {
-        return Integer.compare(this.id,o.id);
+        //如果想按照字符串长度进行排序
+//        return Integer.compare(this.id,o.id);
+        return new LengthComparator().compare(this,o);
+    }
+}
+class LengthComparator implements Comparator<NewPerson>{
+
+
+    @Override
+    public int compare(NewPerson o1, NewPerson o2) {
+        return o1.getName().length()-o2.getName().length();
     }
 }
