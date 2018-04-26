@@ -8,6 +8,7 @@ public class Test1 {
         Employee harry = new Employee("harry", 10000, 2015, 10, 30);
         Date d = harry.getSalaryDate();
         d.setTime(d.getTime()-1000000);
+        System.out.println("anjie");
         System.out.println("--"+harry.getSalaryDate());
 
     }
