@@ -20,7 +20,7 @@ class TalkingClock{
         this.beep=beep;
     }
     public void start(){
-        ActionListener listener=new TimePrinter1();
+        ActionListener listener=this.new TimePrinter1();
         Timer timer=new Timer(interval,listener);
         timer.start();
     }
@@ -28,7 +28,8 @@ class TalkingClock{
         @Override
         public void actionPerformed(ActionEvent e) {
             System.out.println("date is"+new Date());
-            if (beep) Toolkit.getDefaultToolkit().beep();
+//            引用外部类
+            if (TalkingClock.this.beep) Toolkit.getDefaultToolkit().beep();
         }
     }
 }

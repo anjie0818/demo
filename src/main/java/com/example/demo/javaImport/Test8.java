@@ -7,7 +7,7 @@ import java.lang.reflect.Modifier;
 
 public class Test8 {
     public static void main(String[] args) throws ClassNotFoundException {
-        String className="java.lang.Double";
+        String className="com.example.demo.javaImport.TalkingClock";
         Class cl = Class.forName(className);
         //超类
         Class supercl = cl.getSuperclass();

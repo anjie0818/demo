@@ -1,14 +1,26 @@
 
 
 <div id ="app">
-<h2>{{product}} are in stock</h2>
+<h2>
+    <li v-for="product in products">
+        {{product}}
+    </li>
+
+</h2>
 </div>
 <script src="https://unpkg.com/vue"></script>
 <script>
     const app=new Vue({
         el:'#app',
         data:{
-            product:'Bodots'
+            products:[]
+        },
+        created(){
+            fetch('https://api.myjson.com/bins74l63')
+                .then(response => response.json())
+                .then(json=>{
+                    this.products=json.products
+            })
         }
     })
 </script>
