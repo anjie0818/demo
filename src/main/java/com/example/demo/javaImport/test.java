@@ -6,6 +6,7 @@ import java.lang.reflect.Proxy;
 
 public class test {
     public static void main(String[] args) {
+        System.out.println("test");
         student s=new student();
         InvocationHandler handler=new MyHandler(s);
         PersonIn proxy= (PersonIn)Proxy.newProxyInstance(s.getClass().getClassLoader(),s.getClass().getInterfaces(),handler);
