@@ -13,7 +13,7 @@ public class Test1 {
 
     }
 }
-class  Employee{
+class  Employee implements Comparable<Employee>{
     public Employee() {
     }
 
@@ -61,5 +61,11 @@ class  Employee{
                 ", salary=" + salary +
                 ", salaryDate=" + salaryDate +
                 '}';
+    }
+
+
+    @Override
+    public int compareTo(Employee o) {
+        return (int)(this.salary-o.salary);
     }
 }
