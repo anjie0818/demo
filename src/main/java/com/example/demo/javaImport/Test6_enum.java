@@ -7,6 +7,7 @@ public class Test6_enum {
         Scanner in =new Scanner(System.in);
         System.out.println("ENter a size");
         String input= in.next().toUpperCase();
+        //返回类实例
         Size size = Enum.valueOf(Size.class, input);
         System.out.println("size="+size);
         System.out.println(size.getAbbreviation());
