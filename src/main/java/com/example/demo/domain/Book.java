@@ -14,11 +14,17 @@ public class Book {
                 '}';
     }
 
-    @Id
+        @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         private int Id;
         private String bookname;
         private float price;
+
+    public Book(int id,String bookname, float price) {
+        this.Id=id;
+        this.bookname = bookname;
+        this.price = price;
+    }
 
     public String getBookname() {
         return bookname;

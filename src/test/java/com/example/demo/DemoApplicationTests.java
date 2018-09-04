@@ -6,10 +6,15 @@ package com.example.demo;
 import com.example.demo.dao.*;
 import com.example.demo.domain.*;
 
+import com.example.demo.mapper.UserMapper;
 import com.example.demo.service.AuthorService;
 import com.example.demo.service.BookService;
 import com.example.demo.service.EmailService;
 import com.example.demo.service.PersonService;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,8 +23,14 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.context.WebApplicationContext;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
@@ -30,218 +41,39 @@ import java.util.List;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
+@Transactional
 public class DemoApplicationTests {
-	@Test
-	public void test(){
-		System.out.println("ss");
-	}
-/*
+
 	private MockMvc mvc;
 	@Autowired
-	private GirlDao girlDao;
+	WebApplicationContext webApplicationContext;
 	@Autowired
-
-	private ArticleDao articleDao;
-	@Autowired
-	private AuthorDao authorDao;
-	@Autowired
-	private BookDao bookDao;
-    @Autowired
-    private CategoryDao categoryDao;
-    @Autowired
-	private EmailService emailService;
-    @Autowired
-	private PersonService personService;
-    @Autowired
-	private BookService bookService;
-    @Autowired
-	private AuthorService authorService;
-    @Test
-	public void test(){
-		GregorianCalendar gc=new GregorianCalendar();
-		System.out.println(gc.getTime());
+	PersonDao personDao;
+	String expectJson;
+	@Before
+	public void setup() throws JsonProcessingException {
+		Person person1=new Person("anjie","password",34);
+		Person person2=new Person("anjie2","password2",24);
+		personDao.save(person1);
+		personDao.save(person2);
+		expectJson=Object2Json(personDao.findAll());
+		mvc= MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
 
 	}
-    @Test
-	public void testLocalDate(){
-    	//获取当前时间对象
-		LocalDate date = LocalDate.now();
-		//获取当前时间对象的月份和日子
-		int month=date.getMonthValue();
-		int today=date.getDayOfMonth();
-		//将date设置位当前日前最小的date
-		date=date.minusDays(today-1);
-		//得到当月最小日子是周几
-		DayOfWeek weekday = date.getDayOfWeek();
-		//得到当月第一天对应星期数的值
-		int value = weekday.getValue();
-		//进行日历的首行缩进
-		System.out.println("Mon Tue Wed Thu Fri Sat Sun");
-		for (int i=1;i<value;i++){
-			System.out.print("    ");
-		}
-		while(date.getMonthValue()==month){
-			System.out.printf("%3d",date.getDayOfMonth());
-			if (date.getDayOfMonth()==today){
-				System.out.print("*");
-			}else {
-				System.out.print(" ");
-			}
-			date=date.plusDays(1);
-			if (date.getDayOfWeek().getValue()==1){
-				System.out.println();
-			}
-		}
-	}
-    @Test
-	public void testBooksPage(){
-    	Sort.Order order= new Sort.Order(Sort.Direction.DESC,"price");
-    	Sort sort=new Sort(order);
-    	Pageable pageable=new PageRequest(1,5,sort);
-		Page<Book> page = bookDao.findAll(pageable);
-		System.out.println(page.getTotalPages());
-		System.out.println(page.getTotalElements());
-		System.out.println(page.getNumber());
-		System.out.println(page.getContent());
-		System.out.println(page.getNumberOfElements());
-	}
-    @Test
-	public  void saveAuthor(){
-		Author author=new Author();
-		author.setId(1);
-		author.setAge(11);
-		author.setName("aaaaaaa");
-		authorDao.save(author);
-	}
-    @Test
-	public void saveAuthorsTest(){
-    	Author author=null;
-    	List<Author> list=new ArrayList<Author>();
-    	for (int i=0;i<10;i++){
-    		author=new Author();
-    		author.setName("test"+i);
-    		author.setAge(i+20);
-    		list.add(author);
-		}
-		authorService.saveAuthor(list);
-
-
-	}
-    @Test
-	public void saveBooksTest(){
-
-	List<Book> list =new ArrayList<Book>();
-		Author author = new Author();
-		author.setName("jina");
-		author.setAge(111);
-		Book book=null;
-		int i=6;
-		book=new Book();
-		book.setBookname("a55fsf55njie"+i);
-		book.setPrice(i+1010);
-		book.setAuthor(author);
-		bookService.save(book);
-	}
-    @Test
-	public void testBookMaxId(){
-		Integer count= bookDao.findCount();
-		System.out.println(count);
-	}
-
-    @Test
-	public void testPerson(){
-		List<Person> s = personService.getPersonList();
-		for (Person p:s
-			 ) {
-			System.out.println(s);
-		}
-	}
-
-	@Test
-	public void sendInlineResourceMail() {
-		String rscId = "Chrysanthemum.jpg";
-		String content="<html><body>这是有图片的邮件：<img src=\'cid:" + rscId + "\' ></body></html>";
-		String imgPath = "F:\\IdeaProjects\\demo\\pic\\Chrysanthemum.jpg";
-
-		emailService.sendInlineResourceMail("1257772358@qq.com", "主题：这是有图片的邮件", content, imgPath, rscId);
+	protected String Object2Json(Object obj) throws JsonProcessingException {
+		ObjectMapper mapper=new ObjectMapper();
+		return mapper.writeValueAsString(obj);
 	}
 	@Test
-	public void test_book() {
-		List<String> lists=new ArrayList<String>();
-		lists.add("hexin1");
-		lists.add("hexin2");
-		List<Book> list = bookDao.findByBooknameIn(lists);
-		System.out.println(list.size());
-		System.out.println("-------");
-		int page=0,size=1;
-		Pageable pageable = new PageRequest(page, size);
-		Page<Book> s = bookDao.findAll(pageable);
-		Iterator<Book> ss = s.iterator();
-		while (ss.hasNext()) {
-			Book ele = ss.next();
-			//System.out.println(ele);//Bob  Alice  Lisy
-		}
+	public void testPersonController() throws Exception {
+		String uri="/persons";
+		MvcResult result=mvc.perform(MockMvcRequestBuilders.get(uri).accept(MediaType.APPLICATION_JSON)).andReturn();
+		int status = result.getResponse().getStatus();
+		String content = result.getResponse().getContentAsString();
+		Assert.assertEquals("错误，正确的返回值为200",200,status);
+		Assert.assertEquals("错误，返回值和预期返回值不一致",expectJson,content);
 
 	}
-	@Test
-	public void getHello() throws Exception {
-		/**
-		 * 注意：status(),content()要静态导入 mvc.perform(
-		 * MockMvcRequestBuilders.get("/hello").accept(
-		 * MediaType.APPLICATION_JSON)).andExpect(status().isOk())
-		 * .andExpect(content().string(equalTo("Hello World")));
-		 */
 
 
-/*
-	@Test
-	public  void  testGrilDao() {
-
-		for (int i=1 ;i<=50;i++){
-		Girl girl = new Girl();
-		girl.setAge(i);
-		girl.setEmail("2323@qq.com"+i);
-		girl.setPassword("password"+i);
-		girl.setUsername("anjie"+i);
-		//girlDao.save(girl);
-		}
-		List<Girl> list = girlDao.findByUsernameAndAge("anjie",22);
-		for (Girl eleGirl:list){
-			System.out.println(eleGirl);
-		}
-		System.out.println("-----");
-		//girlDao.delete(girl);
-		System.out.println(girlDao.count());
-	}
-	@Test
-	public void testtestGrilDaoPage(){
-		int page=3 ,size=10;
-		Sort sort=new Sort(Sort.Direction.DESC,"id");
-		Pageable pageable=new PageRequest(page, size, sort);
-		Page<Girl> lists = girlDao.findByUsername("anjie", pageable);
-		for (Girl g:lists
-			 ) {
-			System.out.println(g);
-		}
-	}
-	@Test
-	public void testGrilDaoPageFirst15() {
-		int page = 1, size = 5;
-		Sort sort = new Sort(Sort.Direction.DESC, "id");
-		Pageable pageable = new PageRequest(page, size, sort);
-		Page<Girl> lists = girlDao.queryFirst4ByUsername("anjie", pageable);
-		//每页格式：size对比first?  :siza小：size;size大：取first?
-		for (Girl g : lists
-				) {
-			System.out.println(g);
-		}
-	}
-	@Test
-	public void testGrilDaoMySql(){
-		//girlDao.modifyByIdAndUsername("anj2111112qqqq22i00e",21);
-		//girlDao.deleteById(3);
-        //girlDao.findByEmail("2323@qq.com17");
-        girlDao.findByEmail("2323@qq.com16");
-	}
-*/
 }

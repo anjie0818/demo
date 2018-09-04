@@ -31,5 +31,8 @@ public class PersonService {
     public void delete(long id) {
         personDao.delete(id);
     }
+    public List<Person> persons(){
+        return personDao.findAll();
+    }
 
 }

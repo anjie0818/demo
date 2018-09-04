@@ -5,6 +5,7 @@ import com.example.demo.service.PersonService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -13,6 +14,12 @@ import java.util.List;
 public class PersonController {
     @Resource
     PersonService personService;
+    @RequestMapping("/persons")
+    @ResponseBody
+    public List<Person> persons(Model model) {
+        List<Person> persons=personService.persons();
+        return persons;
+    }
     @RequestMapping("/list")
     public String list(Model model) {
         List<Person> persons=personService.getPersonList();

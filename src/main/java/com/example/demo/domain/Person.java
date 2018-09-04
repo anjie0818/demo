@@ -7,6 +7,15 @@ import javax.persistence.Id;
 
 @Entity
 public class Person {
+    public Person() {
+    }
+
+    public Person(String userName, String password, int age) {
+        this.userName = userName;
+        this.password = password;
+        this.age = age;
+    }
+
     @Override
     public String toString() {
         return "Person{" +
